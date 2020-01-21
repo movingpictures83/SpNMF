@@ -1,2 +1,3 @@
 training	plugins/SpNMF/example/training.csv
+traininggroups	plugins/SpNMF/example/traininggroups.csv
 testing	plugins/SpNMF/example/testing.csv
