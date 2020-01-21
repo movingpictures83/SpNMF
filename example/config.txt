@@ -1,0 +1,2 @@
+Prefix plugins/SpNMF/example/
+Plugin SpNMF inputfile parameters.txt outputfile predictions.csv

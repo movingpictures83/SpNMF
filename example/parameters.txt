@@ -1,0 +1,2 @@
+training	plugins/SpNMF/example/training.csv
+testing	plugins/SpNMF/example/testing.csv
