@@ -5,6 +5,7 @@ input <- function(inputfile) {
   rownames(parameters) <<- parameters[,1];
   spdata.train <<- read.csv(toString(parameters["training",2]), header = TRUE, row.names=1);
   spdata.test <<- read.csv(toString(parameters["testing",2]), header = TRUE, row.names=1);
+  ytrain <<- as.numeric(read.csv(toString(parameters["traininggroups",2])));
 }
 
 
@@ -22,9 +23,10 @@ run <- function() {
   spdata.train.rm<<-spdata.train[,colSums(spdata.train)!=0]
   #remove the same variables from test data
   spdata.test.rm<<-spdata.test[,colSums(spdata.train)!=0]
-  y<<-c(rep(1,4),rep(0,4))
-  y.train<<-y.test<<-c(rep(1 ,2),rep(0,2))
-  T.eg<<-getT(spdata.train.rm,y.train,2,3)
+  #y<<-c(rep(1,4),rep(0,4))
+  #y.train<<-y.test<<-c(rep(1 ,2),rep(0,2))
+  ytrain<<-c(rep(1,2), rep(0,2))
+  T.eg<<-getT(spdata.train.rm,ytrain,2,3)
   rs.train<<-spnmf(spdata.train.rm,T.eg)
   w.train<<-rs.train$W
   rs.test<<-spnmf(spdata.test.rm,T.eg)
@@ -34,7 +36,7 @@ run <- function() {
 }
 
 output <- function(outputfile) {
-   md.train=glm(y.train~.,data=data.frame(w.train),family=binomial(link=logit))
+   md.train=glm(ytrain~.,data=data.frame(w.train),family=binomial(link=logit))
    pred=predict(md.train,newdata=data.frame(w.test),type ="response")
    write.table(as.matrix(pred), file=outputfile, sep=",", append=FALSE, na="");
 }
