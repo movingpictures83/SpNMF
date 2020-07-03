@@ -2,7 +2,9 @@
 # Language: R
 # Input: TXT (parameters)
 # Output: CSV (predictions)
-# Tested with: PluMA 1.0, R 3.2.5
+# Tested with: PluMA 1.1, R 4.0.0
+# Dependency: SpNMF_0.1.1
+
 
 PluMA plugin that takes a training and test set,
 and attempts to classify the four samples in the test set
